@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lugrasimo&display=swap');
+
+        body{
+            font-family: "Josefin Sans", sans-serif;
+            background-image:url('./assets/background4.png');
+        }  
+        
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 22px 0;
+            display: flexbox;
+            border: none;
+            background: #e2e0e0;
+        }
+        
+        .payment {
+            width: 400px;
+            height: 600px;
+            background-color: rgb(255, 255, 255);
+            position: absolute;
+            margin-left: 650px;
+            margin-top: 50px;
+            padding: 100px 50px;
+            flex-direction: column;
+            -webkit-box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        label {
+            font-size: 14px;
+            font-weight: 300;
+        }
+        .payInput {
+            padding: 10px;
+            margin: 10px 0px;
+            border: none;
+            border-bottom: 1px solid rgb(36, 35, 35);
+        }
+        .payInput::placeholder {
+            color: rgb(60, 59, 59);
+        }
+       
+        .cardInfo {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .payButton {
+            position: absolute;
+            height: 40px;
+            bottom: -40;
+            width: 100%;
+            left: 0;
+            -webkit-box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+            background-color: #369e62;
+            color: rgb(255, 255, 255);
+            border: none;
+            cursor: pointer;
+        }
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>    
+</head>
+<body>
+    <div class="payment">
+        <div ng-app="paymentApp" ng-controller="PaymentController">
+            <form name="paymentForm" ng-submit="submitForm()" novalidate>
+                <h1>Personal Details</h1>
+                <label>Full Name</label>
+                <input type="text" ng-model="formData.fullName" name="fullName" class="payInput" placeholder="Full Name" required><br>
+                <span ng-show="paymentForm.fullName.$touched && paymentForm.fullName.$invalid">Full Name is required.</span><br>
+                
+                <label>Phone Number</label>
+                <input type="text" ng-model="formData.phoneNumber" name="phoneNumber" class="payInput" placeholder="Phone Number" required><br>
+                <span ng-show="paymentForm.phoneNumber.$touched && paymentForm.phoneNumber.$invalid">Phone Number is required.</span><br>
+                
+                <label>Address</label>
+                <input type="text" ng-model="formData.address" name="address" class="payInput" placeholder="Address" required><br>
+                <span ng-show="paymentForm.address.$touched && paymentForm.address.$invalid">Address is required.</span><br>
+                
+                <h1>Card Information</h1>
+                <div class="cardInfo">
+                    <input type="password" ng-model="formData.cardNumber" name="cardNumber" class="payInput" placeholder="Card Number" required>
+                    <span ng-show="paymentForm.cardNumber.$invalid && paymentForm.cardNumber.$touched">Card Number is required.</span><br>
+                </div>
+
+                <div class="cardInfo"></div>
+                <div class="cardInfo"></div>
+                <div class="cardInfo"> 
+
+
+                    <input type="text" ng-model="formData.expMonth" name="expMonth" class="payInput" placeholder="mm" required>
+                    <span ng-show="paymentForm.expMonth.$invalid && paymentForm.expMonth.$touched">Expiration Month is required.</span><br>
+                    <input type="text" ng-model="formData.expYear" name="expYear" class="payInput" placeholder="yyyy" required>
+                    <span ng-show="paymentForm.expYear.$invalid && paymentForm.expYear.$touched">Expiration Year is required.</span><br>             
+                    <input type="text" ng-model="formData.cvv" name="cvv" class="payInput" placeholder="cvv" required><br>
+                    <span ng-show="paymentForm.cvv.$invalid && paymentForm.cvv.$touched">CVV is required.</span><br>    
+                </div>
+                <button type="submit" class="payButton">Submit</button>
+            </form>
+        </div>       
+    <script>
+        angular.module('paymentApp', [])
+        .controller('PaymentController', ['$scope', function($scope) {
+        $scope.submitForm = function() {
+        if ($scope.paymentForm.$valid) {
+            alert('Payment done successfully ', $scope.formData);
+         } else {
+            alert('Payment not done. Please check your inputs.');
+         }
+        };
+     }]);
+
+
+    </script>
+</body>
+</html>
+
+
+
+        <!-- <label>Full Name</label>
+        <input type="text" placeholder=" " class="payInput"><br>
+        <label>Phone Number</label>
+        <input type="text" placeholder=" " class="payInput"><br>
+        <label>Address</label>
+        <input type="text" placeholder=" " class="payInput"><br>
+        <h1 class="payTitle">Card Information</h1>
+        <div class="cardIcons">
+            <img decoding="async" src="./assets/VISA.png" width="40" alt="" class="cardIcon">
+            <img decoding="async" src="./assets/master.png" alt="" width="40" class="cardIcon">
+        </div>
+        <input type="password" class="payInput" placeholder="Card Number">
+        <div class="cardInfo">
+            <input type="text" placeholder="mm" class="payInput sm">
+            <input type="text" placeholder="yyyy" class="payInput sm">
+            <input type="text" placeholder="cvv" class="payInput sm">
+        </div>
+        <a href="Thanks.html"><button class="payButton">Checkout!</button>
+    </div> 
+</body>
+</html>
+-->
